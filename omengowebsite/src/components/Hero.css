@@ -34,8 +34,4 @@
   .hero__inner {
     grid-template-columns: 1fr;
   }
-
-  .hero__visual {
-    order: -1;
-  }
 }
