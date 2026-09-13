@@ -1,0 +1,82 @@
+.chat-mockup {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  width: 100%;
+  max-width: 380px;
+  border: 1px solid var(--color-border);
+}
+
+.chat-mockup__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-primary-dark);
+  color: var(--color-text-on-dark);
+}
+
+.chat-mockup__avatar {
+  font-size: 1.6rem;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+}
+
+.chat-mockup__name {
+  font-weight: 700;
+}
+
+.chat-mockup__status {
+  font-size: 0.8rem;
+  color: var(--color-text-on-dark-muted);
+}
+
+.chat-mockup__thread {
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  background: #e9e3f4;
+  min-height: 320px;
+}
+
+.chat-bubble {
+  max-width: 82%;
+  padding: 0.6rem 0.9rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.92rem;
+  line-height: 1.4;
+  /* Solo anima posición, nunca opacidad: mientras el texto es visible,
+     tiene que tener contraste completo siempre — incluso a mitad de la
+     animación (una auditoría automática, o alguien que mire justo en ese
+     instante, no debería encontrar el texto semi-transparente). */
+  animation: chat-bubble-in 0.4s ease both;
+}
+
+.chat-bubble--client {
+  align-self: flex-end;
+  background: #d6f2e2;
+  color: var(--color-text);
+  border-bottom-right-radius: 2px;
+}
+
+.chat-bubble--bot {
+  align-self: flex-start;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-bottom-left-radius: 2px;
+}
+
+@keyframes chat-bubble-in {
+  from {
+    transform: translateY(6px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

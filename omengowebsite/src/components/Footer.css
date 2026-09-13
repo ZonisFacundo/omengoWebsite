@@ -1,0 +1,57 @@
+.footer {
+  background: var(--color-primary-dark);
+  color: var(--color-text-on-dark);
+  padding-top: var(--space-6);
+}
+
+.footer__inner {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: var(--space-4);
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid rgba(245, 241, 250, 0.15);
+}
+
+.footer__brand p {
+  margin-top: var(--space-2);
+  color: var(--color-text-on-dark-muted);
+  max-width: 32ch;
+}
+
+.footer__brand .logo__wordmark {
+  color: var(--color-text-on-dark);
+}
+
+.footer__nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.footer__nav a {
+  color: var(--color-text-on-dark-muted);
+}
+
+.footer__nav a:hover {
+  color: var(--color-text-on-dark);
+}
+
+.footer__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.footer__bottom {
+  padding-block: var(--space-3);
+  color: var(--color-text-on-dark-muted);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 760px) {
+  .footer__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+}

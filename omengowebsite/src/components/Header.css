@@ -1,0 +1,168 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 249, 246, 0.9);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: var(--space-2);
+}
+
+.header__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Deja claro en qué rama del sitio está la persona (restaurantes / clínicas). */
+.header__vertical-badge {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: var(--color-primary);
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.header__nav-list {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.header__nav-list a:not(.btn) {
+  font-weight: 600;
+  color: var(--color-text);
+  padding: 0.4rem 0;
+  border-bottom: 2px solid transparent;
+}
+
+.header__nav-list a:not(.btn):hover {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+/* Link a la otra vertical: a propósito distinto de un link de navegación
+   común (va a otra página, no a un ancla de esta misma), por eso lleva
+   su propio tratamiento visual — un botón con borde, no un texto plano.
+   Va DESPUÉS de ".header__nav-list a:not(.btn)" a propósito: esa regla
+   también le aplicaría (tiene la misma especificidad) y le pisaría el
+   borde inferior por "border-bottom: 2px solid transparent" si esta
+   regla quedara antes en el archivo. */
+.header__nav-list a.header__other-vertical {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--color-primary);
+  border: 1.5px solid var(--color-primary-light);
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  white-space: nowrap;
+}
+
+.header__nav-list a.header__other-vertical:hover {
+  background: var(--color-bg-alt);
+  border-color: var(--color-primary);
+}
+
+.header__toggle {
+  display: none;
+  padding: 0.5rem;
+}
+
+.header__burger,
+.header__burger::before,
+.header__burger::after {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--color-primary);
+  border-radius: 2px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.header__burger {
+  position: relative;
+}
+
+.header__burger::before,
+.header__burger::after {
+  content: '';
+  position: absolute;
+  left: 0;
+}
+
+.header__burger::before {
+  top: -7px;
+}
+
+.header__burger::after {
+  top: 7px;
+}
+
+.header__burger.is-open {
+  background: transparent;
+}
+
+.header__burger.is-open::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.header__burger.is-open::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+/*
+ * El header en una sola fila necesita ~1123px reales como mínimo (medido
+ * con Playwright: logo + badge + los 3 links + el botón a la otra
+ * vertical + el CTA de WhatsApp). Por debajo de eso, sin este breakpoint,
+ * el navegador no pasa a una fila nueva — angosta cada link y el texto
+ * de adentro se corta en dos líneas, que es peor. 1200px deja margen de
+ * sobra (scrollbar del sistema operativo incluido).
+ */
+@media (max-width: 1200px) {
+  .header__toggle {
+    display: inline-flex;
+  }
+
+  .header__nav-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    background: var(--color-surface);
+    padding: var(--space-3) var(--space-4) var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: var(--shadow-card);
+    gap: var(--space-2);
+    display: none;
+  }
+
+  .header__nav-list.is-open {
+    display: flex;
+  }
+
+  .header__nav-cta {
+    margin-top: var(--space-1);
+  }
+
+  .header__nav-cta .btn {
+    width: 100%;
+  }
+}

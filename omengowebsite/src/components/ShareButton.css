@@ -1,0 +1,26 @@
+.share-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.share-button__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: var(--color-text-on-dark);
+  border: 1px solid rgba(245, 241, 250, 0.35);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  transition: background-color 0.15s ease;
+}
+
+.share-button__trigger:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.share-button__feedback {
+  font-size: 0.85rem;
+  color: var(--color-text-on-dark-muted);
+}

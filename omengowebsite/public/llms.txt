@@ -1,0 +1,26 @@
+# Omengo
+
+> Omengo es un asistente de atención al cliente por WhatsApp potenciado con
+> inteligencia artificial, con implementaciones a medida para distintos
+> tipos de negocio en Argentina. Los clientes o pacientes de cada negocio
+> escriben por WhatsApp como siempre, y Omengo conversa de forma natural
+> las 24 horas — toma pedidos o coordina turnos, responde consultas y
+> deriva a una persona cuando la conversación lo requiere. No es un
+> producto de autoservicio: cada negocio se integra a medida, con su
+> propia información y sus propias reglas.
+
+## Datos clave
+
+- Dueño del producto: Omengo, empresa con sede en Argentina.
+- Canal: WhatsApp (el cliente final no instala ninguna aplicación nueva).
+- Modelo de implementación: a medida por negocio, no self-service.
+- Contacto: WhatsApp Business, ver https://omengo.com.ar/
+
+## Verticales
+
+- [Restaurantes](https://omengo.com.ar/): toma pedidos, responde consultas
+  de menú y precios, resuelve dudas y deriva a una persona cuando hace
+  falta.
+- [Clínicas y centros de salud](https://omengo.com.ar/clinicas/): coordina
+  turnos, responde consultas sobre obras sociales y precios, y deriva a
+  una persona cuando hace falta.

@@ -1,0 +1,52 @@
+/*
+ * Tokens de diseño de Omengo.
+ * Paleta basada en el isologo (anillo violeta en degradé) + verde de
+ * WhatsApp para los botones de acción, ya que refuerza "esto pasa por
+ * WhatsApp". Los contrastes de texto están elegidos para cumplir WCAG AA
+ * (mínimo 4.5:1 en texto normal, 3:1 en texto grande) contra el fondo en
+ * el que se usan — ver comentarios inline.
+ */
+:root {
+  /* Marca */
+  --color-primary: #4e2a85; /* violeta principal: 10:1 sobre --color-bg */
+  --color-primary-dark: #2a1150; /* violeta oscuro: fondos de secciones/footer */
+  --color-primary-light: #8b5fc7; /* violeta claro: acentos, degradé del isologo */
+  --color-accent: #0b8043; /* verde acción (inspirado en WhatsApp): 5:1 con texto blanco */
+  --color-accent-dark: #086334; /* hover/active del botón de acento */
+
+  /* Superficies */
+  --color-bg: #faf9f6;
+  --color-bg-alt: #f2edf9; /* violeta muy claro, para alternar secciones */
+  --color-surface: #ffffff;
+  --color-border: #e4def0;
+
+  /* Texto */
+  --color-text: #221733; /* ~15:1 sobre --color-bg */
+  --color-text-muted: #564b6e; /* ~6.2:1 sobre --color-bg */
+  --color-text-on-dark: #f5f1fa;
+  --color-text-on-dark-muted: #c9bde3;
+
+  /* Tipografía */
+  --font-display: 'Baloo 2', 'Segoe UI Rounded', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Espaciado */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-5: 3rem;
+  --space-6: 4.5rem;
+  --space-7: 6rem;
+
+  /* Layout */
+  --content-max: 1180px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --shadow-card: 0 12px 32px -16px rgba(42, 17, 80, 0.28);
+  --shadow-soft: 0 4px 16px -8px rgba(42, 17, 80, 0.2);
+
+  /* Layout: alto del CTA fijo en mobile, para que el contenido no quede tapado */
+  --sticky-cta-height: 64px;
+}

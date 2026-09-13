@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--
+      Esta es la landing de CLÍNICAS Y CENTROS DE SALUD (vive en
+      "/clinicas/"). La de restaurantes vive en /index.html, con su
+      propio título, descripción y schema — no reutilizar textos entre
+      las dos, Google puede leerlo como contenido duplicado.
+      Mantener esta descripción igual a la de src/content/clinicas.js.
+    -->
+    <title>Omengo — Atención al cliente por WhatsApp con IA para clínicas y centros de salud</title>
+    <meta
+      name="description"
+      content="Omengo es un asistente con inteligencia artificial que atiende a tus pacientes por WhatsApp las 24 horas: coordina turnos, responde consultas sobre obras sociales y precios, y deriva a una persona cuando hace falta. A medida para tu clínica."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://omengo.com.ar/clinicas/" />
+    <meta name="theme-color" content="#4e2a85" />
+
+    <!-- Open Graph / Facebook / WhatsApp link preview -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content="Omengo" />
+    <meta property="og:url" content="https://omengo.com.ar/clinicas/" />
+    <meta
+      property="og:title"
+      content="Omengo — Atención al cliente por WhatsApp con IA para clínicas y centros de salud"
+    />
+    <meta
+      property="og:description"
+      content="Atendé a tus pacientes por WhatsApp las 24 horas: turnos, obras sociales, precios y dudas resueltas al instante, con IA a medida de tu clínica."
+    />
+    <!--
+      TODO (pendiente de un archivo, no de código): exportar una imagen de
+      1200x630px para esta vertical y guardarla en
+      /public/og-image-clinicas.png. No se puede generar una imagen real
+      desde acá — ver README.
+    -->
+    <meta property="og:image" content="https://omengo.com.ar/og-image-clinicas.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Omengo — Atención al cliente por WhatsApp con IA para clínicas y centros de salud"
+    />
+    <meta
+      name="twitter:description"
+      content="Atendé a tus pacientes por WhatsApp las 24 horas: turnos, obras sociales, precios y dudas resueltas al instante, con IA a medida de tu clínica."
+    />
+    <meta name="twitter:image" content="https://omengo.com.ar/og-image-clinicas.png" />
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="llms-txt" href="/llms.txt" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Schema.org: misma empresa que en "/" (Organization, idéntico a
+         propósito), pero un Service propio para esta vertical. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Omengo",
+        "url": "https://omengo.com.ar/",
+        "logo": "https://omengo.com.ar/logo-omengo.png",
+        "description": "Omengo es un asistente con inteligencia artificial que atiende por WhatsApp a los clientes de negocios en Argentina, con implementaciones a medida para restaurantes y para clínicas y centros de salud.",
+        "areaServed": { "@type": "Country", "name": "Argentina" },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "telephone": "+54-9-11-7828-1132",
+          "areaServed": "AR",
+          "availableLanguage": ["Spanish"]
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": "Asistente de atención al cliente por WhatsApp con inteligencia artificial",
+        "provider": { "@type": "Organization", "name": "Omengo" },
+        "areaServed": { "@type": "Country", "name": "Argentina" },
+        "audience": { "@type": "BusinessAudience", "audienceType": "Clínicas y centros de salud" },
+        "description": "Coordina turnos, responde consultas sobre obras sociales y precios, y deriva a una persona cuando hace falta. Se configura a medida para cada clínica."
+      }
+    </script>
+
+    <!--
+      Google Analytics 4: todavía no hay una cuenta creada (ver README).
+      Cuando la tengan, reemplazar G-XXXXXXXXXX acá abajo por el ID real
+      y descomentar estas dos etiquetas <script>.
+    -->
+    <!--
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    -->
+  </head>
+  <body>
+    <div id="root"><!--ssr-outlet--></div>
+    <script type="module" src="/src/entry-client-clinicas.jsx"></script>
+  </body>
+</html>
