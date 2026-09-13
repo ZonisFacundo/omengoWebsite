@@ -44,3 +44,9 @@
 .comparison__table tbody tr:last-child td {
   border-bottom: none;
 }
+
+@media (max-width: 900px) {
+  .comparison {
+    display: none;
+  }
+}

@@ -36,7 +36,7 @@ export const clinicasContent = {
         { from: 'client', text: 'El jueves a las 17:30' },
         {
           from: 'bot',
-          text: 'Listo, turno confirmado: jueves 17:30 con el Dr. Ibáñez. Te llega la confirmación por acá 👍',
+          text: 'Listo, turno confirmado: jueves 17:30 con el Dr. Ibáñez 👍',
         },
         { from: 'client', text: 'Genial, gracias!' },
         { from: 'bot', text: 'De nada, nos vemos el jueves 🙌' },
