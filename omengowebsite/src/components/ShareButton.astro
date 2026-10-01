@@ -1,0 +1,53 @@
+---
+import Icon from './Icon.astro'
+import { SITE_DESCRIPTION } from '../config/site'
+import './ShareButton.css'
+
+const { text = SITE_DESCRIPTION } = Astro.props
+---
+
+<div class="share-button">
+  <button type="button" class="share-button__trigger" data-share-text={text}>
+    <Icon name="share" size={18} />
+    Compartir
+  </button>
+  <span class="share-button__feedback" role="status"></span>
+</div>
+
+<script>
+  // Lee la URL y el título de la página actual en el momento del click (no
+  // al renderizar), así funciona igual en cualquier página del sitio
+  // (restaurantes, clínicas, la que se sume después) sin tener que pasarle
+  // esos datos a mano desde cada una.
+  document.querySelectorAll('.share-button').forEach((container) => {
+    const trigger = container.querySelector('.share-button__trigger')
+    const feedback = container.querySelector('.share-button__feedback')
+
+    trigger.addEventListener('click', async () => {
+      const shareData = {
+        title: document.title,
+        text: trigger.dataset.shareText,
+        url: window.location.href,
+      }
+
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData)
+        } catch {
+          // La persona canceló el share nativo: no hacemos nada.
+        }
+        return
+      }
+
+      if (navigator.clipboard) {
+        try {
+          await navigator.clipboard.writeText(shareData.url)
+          feedback.textContent = '¡Link copiado!'
+          setTimeout(() => (feedback.textContent = ''), 2500)
+        } catch {
+          feedback.textContent = shareData.url
+        }
+      }
+    })
+  })
+</script>

@@ -1,0 +1,44 @@
+---
+import Icon from './Icon.astro'
+import './FAQ.css'
+
+const { title, items } = Astro.props.content
+
+// El FAQPage schema se arma a partir del mismo array que renderiza las
+// preguntas visibles, para que nunca queden desincronizados.
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+}
+---
+
+<section id="preguntas-frecuentes" class="section faq" aria-labelledby="faq-titulo">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Preguntas frecuentes</span>
+      <h2 id="faq-titulo">{title}</h2>
+    </div>
+    <div class="faq__list">
+      {
+        items.map((item) => (
+          <details class="faq__item">
+            <summary class="faq__question">
+              <h3>{item.question}</h3>
+              <Icon name="chevron" class="faq__chevron" />
+            </summary>
+            <p class="faq__answer">{item.answer}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+</section>

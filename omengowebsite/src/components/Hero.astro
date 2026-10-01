@@ -1,0 +1,31 @@
+---
+import './Hero.css'
+import ChatMockup from './ChatMockup.astro'
+import WhatsAppButton from './WhatsAppButton.astro'
+
+const { eyebrow, h1, paragraph, ctaLabel, ctaMessage, secondaryLabel, secondaryHref, note, chat } =
+  Astro.props.content
+---
+
+<section class="hero">
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <span class="eyebrow">{eyebrow}</span>
+      <h1>{h1}</h1>
+      <p>{paragraph}</p>
+      <div class="cta-row">
+        <WhatsAppButton label={ctaLabel} message={ctaMessage} />
+        <a href={secondaryHref} class="btn btn-secondary">{secondaryLabel}</a>
+      </div>
+      <p class="hero__note">{note}</p>
+    </div>
+    <div class="hero__visual">
+      <ChatMockup
+        headerName={chat.headerName}
+        headerAvatar={chat.headerAvatar}
+        ariaLabel={chat.ariaLabel}
+        messages={chat.messages}
+      />
+    </div>
+  </div>
+</section>

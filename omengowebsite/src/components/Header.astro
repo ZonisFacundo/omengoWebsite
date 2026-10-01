@@ -1,0 +1,90 @@
+---
+import Logo from './Logo.astro'
+import WhatsAppButton from './WhatsAppButton.astro'
+import Icon from './Icon.astro'
+import './Header.css'
+
+const NAV_LINKS = [
+  { href: '#como-funciona', label: 'Cómo funciona' },
+  { href: '#beneficios', label: 'Beneficios' },
+  { href: '#preguntas-frecuentes', label: 'Preguntas frecuentes' },
+]
+
+// Un solo lugar para agregar la próxima vertical el día de mañana.
+const VERTICALS = {
+  restaurantes: {
+    label: 'Restaurantes',
+    otherLabel: 'Clínicas',
+    otherHref: '/clinicas/',
+    otherIcon: 'clipboard',
+  },
+  clinicas: {
+    label: 'Clínicas',
+    otherLabel: 'Restaurantes',
+    otherHref: '/',
+    otherIcon: 'menu',
+  },
+}
+
+const { vertical, ctaMessage } = Astro.props
+const { label, otherLabel, otherHref, otherIcon } = VERTICALS[vertical]
+---
+
+<header class="header">
+  <div class="container header__inner">
+    <a href="#contenido" class="header__brand" aria-label="Omengo, ir al inicio">
+      <Logo size={38} />
+      <span class="header__vertical-badge">{label}</span>
+    </a>
+
+    <nav class="header__nav" aria-label="Navegación principal">
+      <ul id="header-nav-list" class="header__nav-list">
+        {
+          NAV_LINKS.map((link) => (
+            <li>
+              <a href={link.href} data-closes-menu>
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+        <li class="header__other-vertical-item">
+          <a href={otherHref} class="header__other-vertical">
+            <Icon name={otherIcon} size={17} />
+            Para {otherLabel.toLowerCase()}
+          </a>
+        </li>
+        <li class="header__nav-cta">
+          <WhatsAppButton label="Quiero mi bot" message={ctaMessage} size="sm" />
+        </li>
+      </ul>
+    </nav>
+
+    <button type="button" class="header__toggle" aria-expanded="false" aria-controls="header-nav-list">
+      <span class="visually-hidden">Abrir menú</span>
+      <span aria-hidden="true" class="header__burger"></span>
+    </button>
+  </div>
+</header>
+
+<script>
+  // Menú hamburguesa de mobile: la única parte del header que necesita JS.
+  const toggle = document.querySelector('.header__toggle')
+  const list = document.getElementById('header-nav-list')
+  const burger = toggle.querySelector('.header__burger')
+  const toggleLabel = toggle.querySelector('.visually-hidden')
+
+  function setMenuOpen(open) {
+    toggle.setAttribute('aria-expanded', String(open))
+    list.classList.toggle('is-open', open)
+    burger.classList.toggle('is-open', open)
+    toggleLabel.textContent = open ? 'Cerrar menú' : 'Abrir menú'
+  }
+
+  toggle.addEventListener('click', () => {
+    setMenuOpen(toggle.getAttribute('aria-expanded') !== 'true')
+  })
+  list.querySelectorAll('[data-closes-menu]').forEach((link) => {
+    link.addEventListener('click', () => setMenuOpen(false))
+  })
+</script>

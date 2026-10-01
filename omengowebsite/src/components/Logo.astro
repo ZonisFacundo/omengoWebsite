@@ -1,0 +1,22 @@
+---
+/**
+ * Isologo real de Omengo (public/logo-omengo.png): PNG con el fondo
+ * quitado a partir del archivo que pasaron, recortado al anillo. Es el
+ * único lugar del código donde vive la marca gráfica — el favicon
+ * (public/favicon.png) es la misma imagen en otra resolución.
+ */
+import { BRAND_NAME } from '../config/site'
+import './Logo.css'
+
+const { withWordmark = true, size = 40, class: className = '' } = Astro.props
+---
+
+<span class={`logo ${className}`}>
+  <img
+    src="/logo-omengo.png"
+    width={size}
+    height={size}
+    alt={withWordmark ? '' : `Isologo de ${BRAND_NAME}`}
+  />
+  {withWordmark && <span class="logo__wordmark">{BRAND_NAME}</span>}
+</span>

@@ -1,0 +1,24 @@
+---
+import './ChatMockup.css'
+
+const { headerName, headerAvatar, ariaLabel, messages } = Astro.props
+---
+
+<div class="chat-mockup" role="img" aria-label={ariaLabel}>
+  <div class="chat-mockup__header">
+    <span class="chat-mockup__avatar" aria-hidden="true">{headerAvatar}</span>
+    <div>
+      <p class="chat-mockup__name">{headerName}</p>
+      <p class="chat-mockup__status">en línea · responde al instante</p>
+    </div>
+  </div>
+  <ul class="chat-mockup__thread" aria-hidden="true">
+    {
+      messages.map((message, index) => (
+        <li class={`chat-bubble chat-bubble--${message.from}`} style={`animation-delay: ${index * 0.35}s`}>
+          {message.text}
+        </li>
+      ))
+    }
+  </ul>
+</div>

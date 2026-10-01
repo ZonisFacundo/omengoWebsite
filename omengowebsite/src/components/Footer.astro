@@ -1,0 +1,41 @@
+---
+import './Footer.css'
+import Logo from './Logo.astro'
+import WhatsAppButton from './WhatsAppButton.astro'
+import ShareButton from './ShareButton.astro'
+import { BRAND_NAME } from '../config/site'
+
+const YEAR = new Date().getFullYear()
+
+const VERTICALS = {
+  restaurantes: { otherLabel: 'Clínicas', otherHref: '/clinicas/' },
+  clinicas: { otherLabel: 'Restaurantes', otherHref: '/' },
+}
+
+const { vertical, tagline, ctaMessage } = Astro.props
+const { otherLabel, otherHref } = VERTICALS[vertical]
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <Logo size={34} />
+      <p>{tagline}</p>
+    </div>
+
+    <nav class="footer__nav" aria-label="Navegación del pie de página">
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#beneficios">Beneficios</a>
+      <a href="#preguntas-frecuentes">Preguntas frecuentes</a>
+      <a href={otherHref}>Omengo para {otherLabel.toLowerCase()}</a>
+    </nav>
+
+    <div class="footer__actions">
+      <WhatsAppButton label="Escribinos" message={ctaMessage} variant="ghost" />
+      <ShareButton text={tagline} />
+    </div>
+  </div>
+  <div class="container footer__bottom">
+    <p>© {YEAR} {BRAND_NAME}. Hecho en Argentina.</p>
+  </div>
+</footer>

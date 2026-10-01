@@ -1,0 +1,11 @@
+---
+/** Barra de CTA fija, visible solo en mobile (ver StickyMobileCTA.css). */
+import WhatsAppButton from './WhatsAppButton.astro'
+import './StickyMobileCTA.css'
+
+const { label = 'Hablar por WhatsApp', message } = Astro.props
+---
+
+<div class="sticky-cta">
+  <WhatsAppButton label={label} message={message} class="btn-block" />
+</div>

@@ -1,0 +1,29 @@
+---
+/**
+ * CTA principal del sitio: siempre abre WhatsApp. Al ser un sitio estático
+ * sin backend, todo formulario de contacto termina siendo, en definitiva,
+ * este link — es intencional, no un atajo.
+ */
+import { buildWhatsAppLink, WHATSAPP_DEFAULT_MESSAGE } from '../config/site'
+
+const {
+  label = 'Hablar por WhatsApp',
+  message = WHATSAPP_DEFAULT_MESSAGE,
+  variant = 'primary',
+  size = 'md',
+  class: className = '',
+  showIcon = true,
+} = Astro.props
+const sizeClass = size === 'sm' ? 'btn-sm' : ''
+const iconSize = size === 'sm' ? 16 : 22
+---
+
+<a
+  href={buildWhatsAppLink(message)}
+  class={`btn btn-${variant} ${sizeClass} ${className}`}
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  {showIcon && <img src="/whatsapp-icon.png" width={iconSize} height={iconSize} alt="" />}
+  {label}
+</a>

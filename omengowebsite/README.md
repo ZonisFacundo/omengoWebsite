@@ -1,8 +1,9 @@
 # Omengo — landing pages
 
 Sitio de Omengo (asistente de WhatsApp con IA, a medida por tipo de
-negocio). Estático, React + Vite, sin backend ni base de datos. Multi
-página: cada rubro tiene su propia landing con su propia URL.
+negocio). Estático, hecho con [Astro](https://astro.build), sin backend ni
+base de datos. Multi página: cada rubro tiene su propia landing con su
+propia URL.
 
 - **Restaurantes** → `/`
 - **Clínicas y centros de salud** → `/clinicas/`
@@ -17,30 +18,28 @@ npm run preview   # sirve dist/ localmente, para probar el build final
 npm run lint      # oxlint
 ```
 
-En `npm run dev`, la de restaurantes está en `http://localhost:5173/` y la
-de clínicas en `http://localhost:5173/clinicas/`.
+En `npm run dev`, la de restaurantes está en `http://localhost:4321/` y la
+de clínicas en `http://localhost:4321/clinicas/`.
 
 ## Estructura
 
 ```
-index.html                    ← landing de restaurantes ("/")
-clinicas/index.html           ← landing de clínicas ("/clinicas/")
+astro.config.mjs               ← dominio del sitio y navegadores soportados
 src/
-  config/site.js               ← dominio, número de WhatsApp, nombre de marca. Un solo lugar.
-  content/restaurantes.js      ← TODO el contenido de la landing de restaurantes: copys, dolores,
-                                  pasos, beneficios, comparativa, FAQ, demo de chat.
+  pages/index.astro            ← landing de restaurantes ("/")
+  pages/clinicas/index.astro   ← landing de clínicas ("/clinicas/")
+  config/site.js               ← dominio, número de WhatsApp, nombre de marca, GA4. Un solo lugar.
+  content/restaurantes.js      ← TODO el contenido de la landing de restaurantes: <head> (título,
+                                  descripción, schema), copys, dolores, pasos, beneficios,
+                                  comparativa, FAQ, demo de chat.
   content/clinicas.js          ← lo mismo, para clínicas. Pensado desde cero para ese rubro,
                                   no un buscar-y-reemplazar del de restaurantes.
-  components/                  ← un componente + su .css por archivo. Reciben el contenido por
-                                  props (content={...}) — no tienen texto de un rubro específico
-                                  escrito adentro, por eso los usan las dos landings.
-  App.jsx                      ← arma la página de restaurantes con esos componentes + su content
-  AppClinicas.jsx              ← lo mismo, para clínicas
-  entry-client.jsx / entry-client-clinicas.jsx   ← arranque en el navegador de cada página
-  entry-server.jsx / entry-server-clinicas.jsx   ← usados solo en build time, ver más abajo
-  mount.jsx / renderApp.jsx    ← la lógica de "hidratar o renderizar" / "convertir a HTML",
-                                  compartida por ambas páginas para no duplicarla
-scripts/prerender.mjs          ← paso de post-build, corre una vez por página
+  layouts/Layout.astro         ← <head> compartido (meta tags, Open Graph, schema.org, fuentes, GA4)
+  components/LandingPage.astro ← arma una landing completa a partir de un content
+  components/                  ← un componente .astro + su .css por archivo. Reciben el contenido
+                                  por props (content={...}) — no tienen texto de un rubro
+                                  específico escrito adentro, por eso los usan las dos landings.
+  styles/                      ← variables, reset y estilos globales
 public/
   robots.txt, sitemap.xml, llms.txt, favicon.png, logo-omengo.png, whatsapp-icon.png
 ```
@@ -50,21 +49,15 @@ public/
 1. `src/content/<rubro>.js` — copiar la forma de `clinicas.js` y escribir
    el contenido de cero para ese rubro (no traducir/reemplazar palabras
    del de restaurantes: los dolores, beneficios y FAQ tienen que ser
-   reales para ese negocio).
-2. `src/App<Rubro>.jsx` — copiar `AppClinicas.jsx` y cambiar el import del
-   content.
-3. `<rubro>/index.html` — copiar `clinicas/index.html` y cambiar título,
-   descripción, canonical, `og:url` y el schema `Service`.
-4. `src/entry-client-<rubro>.jsx` y `src/entry-server-<rubro>.jsx` —
-   copiar los de clínicas y cambiar el import del App.
-5. `vite.config.js` — agregar la entrada nueva a `build.rollupOptions.input`.
-6. `package.json` — agregar un `vite build --ssr src/entry-server-<rubro>.jsx --outDir dist-server-<rubro>` más a `"build"`.
-7. `scripts/prerender.mjs` — agregar un objeto más al array `PAGES`.
-8. `src/components/Header.jsx` y `Footer.jsx` — agregar la entrada
+   reales para ese negocio). Incluye el bloque `seo` con título,
+   descripción, `path` (`/<rubro>/`) y el texto del schema `Service`.
+2. `src/pages/<rubro>/index.astro` — copiar `pages/clinicas/index.astro` y
+   cambiar el import del content.
+3. `src/components/Header.astro` y `Footer.astro` — agregar la entrada
    correspondiente a `VERTICALS`.
-9. `public/sitemap.xml` y `public/llms.txt` — agregar la URL nueva.
+4. `public/sitemap.xml` y `public/llms.txt` — agregar la URL nueva.
 
-Es mecánico pero son varios archivos — si llega el momento, pedime
+Si llega el momento, pedime
 directamente "agregá la vertical de [rubro]" y lo hago yo.
 
 ## Logo e ícono de WhatsApp: de dónde salen
@@ -87,15 +80,16 @@ transparencia:
   descartando unos pixeles sueltos que quedaban en las esquinas
   redondeadas.
 
-Si en algún momento cambia el logo, `src/components/Logo.jsx` es el
+Si en algún momento cambia el logo, `src/components/Logo.astro` es el
 único lugar que lo usa (y `public/favicon.png`, que es el mismo archivo
 en otro tamaño, para la pestaña del navegador). El ícono de WhatsApp se
-usa desde `src/components/WhatsAppButton.jsx`.
+usa desde `src/components/WhatsAppButton.astro`.
 
 ## Pendiente: imágenes para redes sociales
 
 Dejé los meta tags `og:image` / `twitter:image` de cada página apuntando
-a `/og-image.png` (restaurantes) y `/og-image-clinicas.png` (clínicas),
+a `/og-image.png` (restaurantes) y `/og-image-clinicas.png` (clínicas) —
+se configuran en `seo.ogImage` de cada `src/content/*.js` —
 pero esos archivos no existen todavía — a diferencia del logo, esto no es
 "sacarle el fondo a una foto", es diseñar un layout de 1200x630px desde
 cero (con texto, no solo el ísologo). Sin ellos, cuando alguien comparta
@@ -111,30 +105,31 @@ Avisame cuando quieras encararlo y lo armamos.
   serviditas automáticamente por ser archivos estáticos reales dentro de
   `dist/`.
 
-## Por qué el build tiene varios pasos
+## Por qué Astro
 
-`npm run build` hace, en orden: `vite build` (arma las dos páginas como
-sitio normal) → un `vite build --ssr` por página (una versión de cada una
-que corre en Node, solo durante el build) → `node scripts/prerender.mjs`
-(usa esas versiones para generar el HTML final de cada página y pegarlo
-dentro de su `dist/**/index.html`).
+Es una landing informativa: se lee, se hace click en WhatsApp y listo. No
+necesita un framework corriendo en el navegador. Astro arma todo el HTML
+en `npm run build` a partir de los componentes, y al navegador le llega
+solo HTML + CSS — sin React ni ningún otro runtime de JavaScript.
 
-El motivo: una app de React + Vite "pura" genera un `index.html` casi
-vacío (`<div id="root"></div>`) — todo el contenido lo arma React recién
-cuando el navegador ejecuta el JavaScript. Para un usuario con navegador
-normal eso no se nota, pero es un problema para vos porque:
+Eso importa por dos razones:
 
-- Los crawlers de IA (GPTBot, ClaudeBot, PerplexityBot y similares) en
-  general **no ejecutan JavaScript** — verían una página vacía.
-- La vista previa que arma WhatsApp/Instagram/Facebook al pegar el link
-  tampoco ejecuta JavaScript.
-- Google sí puede ejecutar JavaScript, pero indexa mejor y más rápido
-  cuando el HTML ya viene con el contenido.
+- **Buscadores e IAs**: el contenido ya viene completo en el HTML. Los
+  crawlers de IA (GPTBot, ClaudeBot, PerplexityBot y similares) y la vista
+  previa que arma WhatsApp/Instagram/Facebook al pegar el link en general
+  **no ejecutan JavaScript**, así que necesitan que el texto esté ahí.
+  Google también indexa mejor y más rápido así.
+- **Velocidad en el celular**: antes (React + Vite con prerenderizado) el
+  HTML ya venía completo, pero además se descargaban ~230 KB de JavaScript
+  (~72 KB comprimido) solo para el menú hamburguesa y el botón de
+  compartir. Ahora esas dos cosas son dos `<script>` de ~500 bytes cada uno,
+  dentro de `Header.astro` y `ShareButton.astro`. El FAQ usa `<details>`,
+  que es nativo del navegador y no necesita JS.
 
-Este paso extra soluciona eso sin agregar ningún servidor: sigue siendo
-un sitio 100% estático (`dist/` son solo archivos HTML/CSS/JS por
-página), pensado específicamente porque mencionaste que te importa la
-visibilidad en buscadores e IAs generativas.
+Si algún día hace falta algo realmente interactivo (un formulario con
+validación, un simulador de precios), Astro permite sumar un componente de
+React/Preact/etc. solo en ese lugar ("island"), sin cargarlo en todo el
+sitio.
 
 ## Sobre agregar `/clinicas/` sin perder posiciones de `/`
 
@@ -182,8 +177,9 @@ resta nada a lo que ya había.
   subcarpetas de listado.
 - **GA4 y Google Search Console**: necesitan una cuenta de Google real
   (un ID de medición `G-XXXXXXXXXX` para GA4, y verificar la propiedad del
-  dominio en Search Console) — no son datos que yo pueda inventar. Dejé el
-  lugar exacto para GA4 comentado en cada `index.html` con instrucciones.
+  dominio en Search Console) — no son datos que yo pueda inventar. Para
+  GA4 alcanza con completar `GA4_MEASUREMENT_ID` en `src/config/site.js`:
+  el layout agrega el tag en todas las páginas automáticamente.
   Para Search Console, una vez que entres a
   [search.google.com/search-console](https://search.google.com/search-console),
   vas a poder verificar el dominio por DNS (con el proveedor donde

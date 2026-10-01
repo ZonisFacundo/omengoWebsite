@@ -7,6 +7,23 @@ export const clinicasContent = {
   vertical: 'clinicas',
   navLabel: 'Clínicas',
 
+  // <head> de la página (ver src/layouts/Layout.astro).
+  seo: {
+    path: '/clinicas/',
+    title: 'Omengo — Atención al cliente por WhatsApp con IA para clínicas y centros de salud',
+    description:
+      'Omengo es un asistente con inteligencia artificial que atiende a tus pacientes por WhatsApp las 24 horas: coordina turnos, responde consultas sobre obras sociales y precios, y deriva a una persona cuando hace falta. A medida para tu clínica.',
+    socialDescription:
+      'Atendé a tus pacientes por WhatsApp las 24 horas: turnos, obras sociales, precios y dudas resueltas al instante, con IA a medida de tu clínica.',
+    // TODO (pendiente de un archivo, no de código): exportar una imagen
+    // de 1200x630px para esta vertical y guardarla en
+    // public/og-image-clinicas.png — ver README.
+    ogImage: '/og-image-clinicas.png',
+    serviceAudience: 'Clínicas y centros de salud',
+    serviceDescription:
+      'Coordina turnos, responde consultas sobre obras sociales y precios, y deriva a una persona cuando hace falta. Se configura a medida para cada clínica.',
+  },
+
   hero: {
     eyebrow: 'Para clínicas y centros de salud en Argentina',
     h1: 'Atendé a tus pacientes por WhatsApp, las 24 horas, sin perder ni un turno',

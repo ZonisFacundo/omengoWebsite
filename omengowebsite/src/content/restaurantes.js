@@ -5,9 +5,29 @@
 //
 // Ver src/content/clinicas.js para la otra vertical — ambas alimentan los
 // mismos componentes (src/components/*), solo cambia el contenido.
+import { SITE_TITLE, SITE_DESCRIPTION } from '../config/site'
+
 export const restaurantesContent = {
   vertical: 'restaurantes',
   navLabel: 'Restaurantes',
+
+  // <head> de la página (ver src/layouts/Layout.astro). Título,
+  // descripción y schema propios de esta vertical — no reutilizar textos
+  // con clinicas.js, Google puede leerlo como contenido duplicado.
+  seo: {
+    path: '/',
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    socialDescription:
+      'Atendé a tus clientes por WhatsApp las 24 horas: pedidos, menú, precios y dudas resueltas al instante, con IA a medida de tu restaurante.',
+    // TODO (pendiente de un archivo, no de código): exportar una imagen
+    // de 1200x630px a partir del logo y guardarla en
+    // public/og-image.png — ver README.
+    ogImage: '/og-image.png',
+    serviceAudience: 'Restaurantes',
+    serviceDescription:
+      'Toma pedidos, responde consultas de menú y precios, y deriva a un vendedor humano cuando hace falta. Se configura a medida para cada restaurante.',
+  },
 
   hero: {
     eyebrow: 'Para restaurantes en Argentina',

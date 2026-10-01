@@ -1,0 +1,25 @@
+---
+import Icon from './Icon.astro'
+import './ProblemSection.css'
+
+const { title, intro, items } = Astro.props.content
+---
+
+<section class="section problem" aria-labelledby="problema-titulo">
+  <div class="container">
+    <div class="section-header">
+      <h2 id="problema-titulo">{title}</h2>
+      <p>{intro}</p>
+    </div>
+    <ul class="problem__list">
+      {
+        items.map((point) => (
+          <li class="problem__item">
+            <Icon name={point.icon} class="problem__icon" />
+            <p>{point.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

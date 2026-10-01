@@ -1,0 +1,39 @@
+---
+import './ComparisonTable.css'
+
+const { title, rows } = Astro.props.content
+---
+
+<section class="section section--alt comparison" aria-labelledby="comparativa-titulo">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">La diferencia</span>
+      <h2 id="comparativa-titulo">{title}</h2>
+    </div>
+    <div class="comparison__table-wrap" tabindex="0" role="region" aria-labelledby="comparativa-titulo">
+      <table class="comparison__table">
+        <caption class="visually-hidden">
+          Comparación entre atender WhatsApp manualmente y hacerlo con Omengo
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Situación</th>
+            <th scope="col">Sin Omengo</th>
+            <th scope="col">Con Omengo</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            rows.map((row) => (
+              <tr>
+                <th scope="row">{row.topic}</th>
+                <td>{row.before}</td>
+                <td class="comparison__after">{row.after}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

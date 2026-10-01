@@ -4,12 +4,15 @@
 // vive acá para no tener que buscarlo componente por componente.
 // ─────────────────────────────────────────────────────────────────────────
 
-// Dominio de producción. Se usa en <link rel="canonical">, Open Graph,
-// el schema.org y el sitemap. Si el dominio cambia, se actualiza acá.
+// Dominio de producción. Se usa en <link rel="canonical">, Open Graph y
+// el schema.org (src/layouts/Layout.astro). Si el dominio cambia, se
+// actualiza acá y en public/sitemap.xml, robots.txt y llms.txt.
 export const SITE_URL = 'https://omengo.com.ar'
 
 export const BRAND_NAME = 'Omengo'
 
+// Título y descripción de la landing de restaurantes ("/"). Los de
+// clínicas viven en src/content/clinicas.js.
 export const SITE_TITLE = 'Omengo — Atención al cliente por WhatsApp con IA para restaurantes'
 
 export const SITE_DESCRIPTION =
@@ -30,5 +33,6 @@ export function buildWhatsAppLink(message = WHATSAPP_DEFAULT_MESSAGE) {
 
 // Google Analytics 4 (formato "G-XXXXXXXXXX"). Se deja vacío a propósito:
 // Omengo todavía no tiene una cuenta de GA4 creada. Cuando la tengan,
-// completar este valor alcanza para activar el tracking (ver README).
+// completar este valor alcanza para activar el tracking en todas las
+// páginas (ver src/layouts/Layout.astro).
 export const GA4_MEASUREMENT_ID = ''

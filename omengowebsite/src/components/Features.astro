@@ -1,0 +1,29 @@
+---
+import Icon from './Icon.astro'
+import './Features.css'
+
+const { eyebrow, title, intro, items } = Astro.props.content
+---
+
+<section id="beneficios" class="section features" aria-labelledby="beneficios-titulo">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">{eyebrow}</span>
+      <h2 id="beneficios-titulo">{title}</h2>
+      <p>{intro}</p>
+    </div>
+    <ul class="features__grid">
+      {
+        items.map((feature) => (
+          <li class="features__card">
+            <div class="features__icon">
+              <Icon name={feature.icon} size={26} />
+            </div>
+            <h3>{feature.title}</h3>
+            <p>{feature.description}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
