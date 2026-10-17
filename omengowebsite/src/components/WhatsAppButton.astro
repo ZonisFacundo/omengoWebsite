@@ -13,6 +13,9 @@ const {
   size = 'md',
   class: className = '',
   showIcon = true,
+  // Dónde está el botón (header, hero, etc.). Se manda a GA4 con cada
+  // clic para saber qué CTA convierte más — ver Layout.astro.
+  location,
 } = Astro.props
 const sizeClass = size === 'sm' ? 'btn-sm' : ''
 const iconSize = size === 'sm' ? 16 : 22
@@ -23,6 +26,7 @@ const iconSize = size === 'sm' ? 16 : 22
   class={`btn btn-${variant} ${sizeClass} ${className}`}
   target="_blank"
   rel="noopener noreferrer"
+  data-cta-location={location}
 >
   {showIcon && <img src="/whatsapp-icon.png" width={iconSize} height={iconSize} alt="" />}
   {label}

@@ -41,7 +41,8 @@ src/
                                   específico escrito adentro, por eso los usan las dos landings.
   styles/                      ← variables, reset y estilos globales
 public/
-  robots.txt, sitemap.xml, llms.txt, favicon.png, logo-omengo.png, whatsapp-icon.png
+  robots.txt, sitemap.xml, llms.txt, favicon.png, logo-omengo.png, whatsapp-icon.png,
+  og-image.png, og-image-clinicas.png
 ```
 
 ## Cómo agregar una tercera vertical el día de mañana
@@ -85,16 +86,19 @@ Si en algún momento cambia el logo, `src/components/Logo.astro` es el
 en otro tamaño, para la pestaña del navegador). El ícono de WhatsApp se
 usa desde `src/components/WhatsAppButton.astro`.
 
-## Pendiente: imágenes para redes sociales
+## Imágenes para redes sociales
 
-Dejé los meta tags `og:image` / `twitter:image` de cada página apuntando
-a `/og-image.png` (restaurantes) y `/og-image-clinicas.png` (clínicas) —
-se configuran en `seo.ogImage` de cada `src/content/*.js` —
-pero esos archivos no existen todavía — a diferencia del logo, esto no es
-"sacarle el fondo a una foto", es diseñar un layout de 1200x630px desde
-cero (con texto, no solo el ísologo). Sin ellos, cuando alguien comparta
-el link en WhatsApp/Instagram/etc. la vista previa va a salir sin imagen.
-Avisame cuando quieras encararlo y lo armamos.
+`public/og-image.png` (restaurantes) y `public/og-image-clinicas.png`
+(clínicas) son la vista previa que muestran WhatsApp, Instagram, Facebook,
+etc. al compartir el link. Las referencian los meta tags `og:image` /
+`twitter:image` vía `seo.ogImage` de cada `src/content/*.js`.
+
+Son 1200x630px, con la paleta de `src/styles/variables.css`, el logo,
+el titular de cada vertical y un pedacito del chat de demo del Hero. Se
+generaron renderizando un HTML con Chrome headless. Si cambia el titular
+o se suma una vertical, hay que regenerarlas (o pedímelo). Ojo: WhatsApp
+y Facebook cachean la vista previa; para forzar que la actualicen se
+puede usar el [Sharing Debugger de Facebook](https://developers.facebook.com/tools/debug/).
 
 ## Deploy (Vercel / Netlify)
 

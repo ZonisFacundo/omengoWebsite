@@ -9,6 +9,6 @@ const { title, paragraph, ctaLabel, ctaMessage } = Astro.props.content
   <div class="container final-cta__inner">
     <h2 id="cta-final-titulo">{title}</h2>
     <p>{paragraph}</p>
-    <WhatsAppButton label={ctaLabel} message={ctaMessage} />
+    <WhatsAppButton label={ctaLabel} message={ctaMessage} location="cta_final" />
   </div>
 </section>

@@ -105,6 +105,24 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', '${GA4_MEASUREMENT_ID}');`}
           />
+          {/*
+            Evento "click_whatsapp": cada clic en un link a wa.me, con el
+            botón que lo originó (data-cta-location, ver WhatsAppButton.astro).
+            transport_type beacon: el link abre otra pestaña/app y así el
+            evento no se pierde aunque el navegador cambie de página.
+          */}
+          <script
+            is:inline
+            set:html={`document.addEventListener('click', function (e) {
+  var link = e.target.closest && e.target.closest('a[href^="https://wa.me/"]');
+  if (!link) return;
+  gtag('event', 'click_whatsapp', {
+    cta_location: link.dataset.ctaLocation || 'otro',
+    vertical: '${seo.path === '/' ? 'restaurantes' : seo.path.replace(/\//g, '')}',
+    transport_type: 'beacon',
+  });
+});`}
+          />
         </>
       )
     }

@@ -10,14 +10,13 @@ export const clinicasContent = {
   // <head> de la página (ver src/layouts/Layout.astro).
   seo: {
     path: '/clinicas/',
-    title: 'Omengo — Atención al cliente por WhatsApp con IA para clínicas y centros de salud',
+    title: 'Atención por WhatsApp con IA para clínicas | Omengo',
     description:
-      'Omengo es un asistente con inteligencia artificial que atiende a tus pacientes por WhatsApp las 24 horas: coordina turnos, responde consultas sobre obras sociales y precios, y deriva a una persona cuando hace falta. A medida para tu clínica.',
+      'Asistente con IA que atiende a tus pacientes por WhatsApp las 24 horas: coordina turnos, responde sobre obras sociales y deriva a una persona si hace falta.',
     socialDescription:
       'Atendé a tus pacientes por WhatsApp las 24 horas: turnos, obras sociales, precios y dudas resueltas al instante, con IA a medida de tu clínica.',
-    // TODO (pendiente de un archivo, no de código): exportar una imagen
-    // de 1200x630px para esta vertical y guardarla en
-    // public/og-image-clinicas.png — ver README.
+    // Imagen de 1200x630px para la vista previa al compartir el link —
+    // ver README.
     ogImage: '/og-image-clinicas.png',
     serviceAudience: 'Clínicas y centros de salud',
     serviceDescription:
@@ -171,7 +170,7 @@ export const clinicasContent = {
       },
       {
         id: 'sin-apps',
-        icon: 'whatsapp',
+        icon: 'phone',
         title: 'Tus pacientes no instalan nada',
         description: 'Todo pasa por el WhatsApp que ya usan todos los días, sin apps ni registros nuevos.',
       },

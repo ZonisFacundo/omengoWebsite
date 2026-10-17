@@ -20,9 +20,8 @@ export const restaurantesContent = {
     description: SITE_DESCRIPTION,
     socialDescription:
       'Atendé a tus clientes por WhatsApp las 24 horas: pedidos, menú, precios y dudas resueltas al instante, con IA a medida de tu restaurante.',
-    // TODO (pendiente de un archivo, no de código): exportar una imagen
-    // de 1200x630px a partir del logo y guardarla en
-    // public/og-image.png — ver README.
+    // Imagen de 1200x630px para la vista previa al compartir el link —
+    // ver README.
     ogImage: '/og-image.png',
     serviceAudience: 'Restaurantes',
     serviceDescription:
@@ -171,7 +170,7 @@ export const restaurantesContent = {
       },
       {
         id: 'sin-apps',
-        icon: 'whatsapp',
+        icon: 'phone',
         title: 'Tus clientes no instalan nada',
         description: 'Todo pasa por el WhatsApp que ya usan todos los días, sin apps ni registros nuevos.',
       },

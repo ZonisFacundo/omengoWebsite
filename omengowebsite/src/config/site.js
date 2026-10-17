@@ -12,11 +12,13 @@ export const SITE_URL = 'https://omengo.com.ar'
 export const BRAND_NAME = 'Omengo'
 
 // Título y descripción de la landing de restaurantes ("/"). Los de
-// clínicas viven en src/content/clinicas.js.
-export const SITE_TITLE = 'Omengo — Atención al cliente por WhatsApp con IA para restaurantes'
+// clínicas viven en src/content/clinicas.js. Límites: título ≤ 60
+// caracteres y descripción ≤ 160 — más largo, Google lo corta en los
+// resultados.
+export const SITE_TITLE = 'Atención por WhatsApp con IA para restaurantes | Omengo'
 
 export const SITE_DESCRIPTION =
-  'Omengo es un asistente con inteligencia artificial que atiende a tus clientes por WhatsApp las 24 horas: toma pedidos, muestra el menú y precios, resuelve dudas y deriva a una persona cuando hace falta. A medida para tu restaurante.'
+  'Asistente con IA que atiende a tus clientes por WhatsApp las 24 horas: toma pedidos, muestra el menú y precios, y deriva a una persona cuando hace falta.'
 
 // Número de WhatsApp Business en formato internacional, sin "+" ni espacios
 // (así lo pide la API de wa.me).
@@ -31,8 +33,7 @@ export function buildWhatsAppLink(message = WHATSAPP_DEFAULT_MESSAGE) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`
 }
 
-// Google Analytics 4 (formato "G-XXXXXXXXXX"). Se deja vacío a propósito:
-// Omengo todavía no tiene una cuenta de GA4 creada. Cuando la tengan,
-// completar este valor alcanza para activar el tracking en todas las
-// páginas (ver src/layouts/Layout.astro).
-export const GA4_MEASUREMENT_ID = ''
+// Google Analytics 4 (propiedad "omengo.com.ar"). Activa el tracking en
+// todas las páginas, incluido el evento click_whatsapp (ver
+// src/layouts/Layout.astro). Vacío = sin tracking.
+export const GA4_MEASUREMENT_ID = 'G-9HTW4VHS2L'
