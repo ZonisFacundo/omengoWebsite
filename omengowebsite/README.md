@@ -58,6 +58,10 @@ public/
    correspondiente a `VERTICALS`.
 4. `public/sitemap.xml` y `public/llms.txt` — agregar la URL nueva.
 
+Cada vez que cambie el contenido de una página (textos, títulos, FAQ),
+actualizar su `<lastmod>` en `public/sitemap.xml` con la fecha del
+cambio: Google lo usa para saber cuándo volver a rastrearla.
+
 Si llega el momento, pedime
 directamente "agregá la vertical de [rubro]" y lo hago yo.
 
